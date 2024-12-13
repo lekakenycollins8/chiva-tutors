@@ -47,7 +47,7 @@ const Footer = () => {
               <IconButton 
               href="https://www.instagram.com/chiva_tutorhub/profilecard/?igsh=eGRsaHhkN2Y4eDls" 
               target="_blank"
-              className="text-white hover:text-purple-400 transition-colors"
+              sx={{ color: 'white', '&:hover': { color: 'purple.400' }, transition: 'color 0.3s' }}
               aria-label="Instagram"
               >
               <InstagramIcon />
@@ -55,14 +55,14 @@ const Footer = () => {
               <IconButton 
               href="tel:+254719575186" 
               target="_blank"
-              className="text-white hover:text-purple-400 transition-colors"
+              sx={{ color: 'white', '&:hover': { color: 'purple.400' }, transition: 'color 0.3s' }}
               aria-label="Phone"
               >
               <PhoneIcon />
               </IconButton>
               <IconButton 
               href="mailto:essayassignments23@gmail.com"
-              className="text-white hover:text-purple-400 transition-colors"
+              sx={{ color: 'white', '&:hover': { color: 'purple.400' }, transition: 'color 0.3s' }}
               aria-label="Email"
               >
               <EmailIcon />
