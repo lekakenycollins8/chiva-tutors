@@ -45,7 +45,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about }) =
                 gap: 4,
                 display: { xs: 'none', md: 'flex' },
                 mb: 8,
-                zIndex: 1,
+                zIndex: 1000,
             }}
             direction="column"
         >
