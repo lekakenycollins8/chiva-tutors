@@ -1,0 +1,7 @@
+[build]
+  base = "frontend/tutorshub"
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "frontend/tutorshub/.next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
