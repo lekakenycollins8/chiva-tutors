@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { IconType } from 'react-icons';
+import { motion } from 'framer-motion';
 
 interface Topic {
     title: string;
@@ -16,7 +17,7 @@ export const BentoGrid = ({
     return (
         <div
             className={cn(
-                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+                "grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
                 className
             )}
         >
@@ -43,46 +44,60 @@ export const BentoGridItem = ({
     return (
         <div
             className={cn(
-                "relative rounded-xl group transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 text-white",
+                "group relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600/20 to-purple-600/20 transition-all duration-300",
                 className
             )}
         >
-            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-            <div className="relative z-10 p-6 flex flex-col h-full">
+            {/* Animated gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="relative z-10 p-8 h-full flex flex-col">
                 {/* Icon and Title Row */}
-                <div className="flex items-center gap-3 mb-4">
-                    {Icon && <Icon className="w-6 h-6 text-yellow-300 transition-transform duration-300 group-hover:scale-110" />}
-                    <h3 className="text-xl font-bold group-hover:text-yellow-300 transition-colors duration-300">{title}</h3>
+                <div className="flex items-center gap-4 mb-6">
+                    {Icon && (
+                        <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
+                            <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                    )}
+                    <h3 className="text-2xl font-bold text-white group-hover:text-blue-200 transition-colors duration-300">
+                        {title}
+                    </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-white/90 mb-6">{description}</p>
+                <p className="text-gray-300 mb-8 leading-relaxed">{description}</p>
 
                 {/* Topics */}
-                <div className="space-y-4 flex-grow">
+                <div className="space-y-6 flex-grow">
                     {topics.map((topic, idx) => (
-                        <div key={idx} className="space-y-2">
-                            <h4 className="text-sm font-bold text-yellow-300 mb-2">{topic.title}</h4>
+                        <motion.div 
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="space-y-3"
+                        >
+                            <h4 className="text-lg font-semibold text-blue-300 mb-3">{topic.title}</h4>
                             <ul className="flex flex-wrap gap-2">
                                 {topic.details.map((detail, detailIdx) => (
                                     <li
                                         key={`${detail}-${detailIdx}`}
-                                        className="inline-block bg-blue-500 bg-opacity-30 text-white text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:bg-opacity-50"
+                                        className="inline-block px-3 py-1.5 text-sm text-gray-200 bg-gray-800/50 backdrop-blur-sm rounded-full border border-gray-700/50 hover:border-gray-600 transition-all duration-300"
                                     >
                                         {detail}
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
                 {/* Levels */}
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-gray-800">
                     {levels.map((level, idx) => (
                         <span
                             key={level + idx}
-                            className="bg-green-500 bg-opacity-30 text-white text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:bg-opacity-50"
+                            className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-emerald-300 bg-emerald-900/20 rounded-full border border-emerald-800/30"
                         >
                             {level}
                         </span>

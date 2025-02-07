@@ -242,7 +242,7 @@ export const social = [
     {
         name: 'Email',
         icon: 'email',
-        link: 'mailto:essayassignments23@gmail.com',
+        link: 'mailto:ochiengcharles1997@gmail.com',
     },
 ]
 

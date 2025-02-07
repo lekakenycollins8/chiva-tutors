@@ -31,7 +31,7 @@ const Footer = () => {
   ];
 
   return (
-    <Box className="bg-gradient-to-b from-gray-900 to-black text-white">
+    <Box className="bg-gradient-to-b from-purple-100 to-black text-white">
       <Container maxWidth="lg" className="py-12">
         <Grid container spacing={6}>
           {/* Brand Section */}
@@ -61,7 +61,7 @@ const Footer = () => {
               <PhoneIcon />
               </IconButton>
               <IconButton 
-              href="mailto:essayassignments23@gmail.com"
+              href="mailto:ochiengcharles1997@gmail.com"
               sx={{ color: 'white', '&:hover': { color: 'purple.400' }, transition: 'color 0.3s' }}
               aria-label="Email"
               >

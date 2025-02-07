@@ -1,55 +1,138 @@
-import MagicButton from './ui/MagicButton';
-import { Spotlight } from './ui/Spotlight';
-import { TextGenerateEffect } from './ui/text-generate-effect';
-import { FaLocationArrow } from 'react-icons/fa';
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { GraduationCap, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const Hero = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.4, 0.0, 0.2, 1],
+      },
+    },
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <div className="pb-20 pt-36 transform will-change-transform">
-        <div className="relative">
-            <Spotlight 
-                className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen" 
-                fill="hsl(var(--primary))" 
-            />
-            <Spotlight 
-                className="-top-10 -left-full h-[80vh] w-[50vw]" 
-                fill="hsl(var(--secondary))" 
-            />
-            <Spotlight 
-                className="top-28 left-80 h-[80vh] w-[50vw]" 
-                fill="hsl(var(--accent))" 
-            />
-        </div>
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+      </div>
 
-        <div className="h-screen w-full dark:bg-black-100 bg-white  dark:bg-dot-white/[0.3] bg-dot-black/[0.2] flex items-center justify-center absolute top-0 left-0">
-            
-            <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black-100 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"/>
-        </div>
-        <div className="flex justify-center relative my-20 z-20">
-            <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-                <h2 className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
-                    Best Tutoring at Chiva TutorHub
-                </h2>
-                <TextGenerateEffect
-                    className="text-center text-40px md:text-5xl lg:text-6xl font-bold"
-                    words="Unlock Your Potential with Expert Tutoring in Chemistry, Math, Business & Accounting.
-                            At CHIVA Tutorhub, we provide personalized, results-driven tutoring to help you succeed in school and beyond. Let’s make learning your strength!"
-                />
-                <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-                    Hi, I&apos; m Charles, a professional tutor at Chiva TutorHub with 10 years of experience.
-                </p>
-                <a href="/about">
-                    <MagicButton
-                        title="About me"
-                        icon={<FaLocationArrow />}
-                        position='right'
-                    />
-                </a>
+      {/* Content Container */}
+      <motion.div 
+        className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Badge */}
+        <motion.div 
+          variants={itemVariants}
+          className="inline-flex items-center px-4 py-2 mb-8 mt-8 text-sm font-medium text-blue-200 bg-blue-900/30 rounded-full backdrop-blur-sm"
+        >
+          <GraduationCap className="w-4 h-4 mr-2" />
+          Welcome to Chiva TutorHub
+        </motion.div>
+
+        {/* Main Heading */}
+        <motion.h1 
+          variants={itemVariants}
+          className="max-w-4xl mb-6 text-4xl font-bold tracking-tight text-center text-white sm:text-5xl md:text-6xl md:leading-tight"
+        >
+          Unlock Your Potential with Expert Tutoring
+        </motion.h1>
+
+        {/* Subheading */}
+        <motion.p 
+          variants={itemVariants}
+          className="max-w-2xl mb-8 text-xl text-center text-gray-300 md:text-2xl"
+        >
+          Personalized learning in Chemistry, Math, Business & Accounting to help you excel in your academic journey.
+        </motion.p>
+
+        {/* Tutor Introduction */}
+        <motion.div 
+          variants={itemVariants}
+          className="flex items-center justify-center mb-12 space-x-4"
+        >
+          <Image 
+            src="/pfp.jpg" 
+            alt="Charles"
+            className="object-cover rounded-full"
+            width={48}
+            height={48}
+          />
+          <p className="text-lg text-gray-200">
+            Hi, I&apos;m Charles, your expert tutor with 10 years of experience
+          </p>
+        </motion.div>
+
+        {/* CTA Button */}
+        <motion.a
+          href="/contact"
+          variants={buttonVariants}
+          whileHover="hover"
+          className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white transition-colors bg-indigo-700 rounded-full hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+        >
+          Contact Us Today
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </motion.a>
+
+        {/* Stats */}
+        <motion.div 
+          variants={itemVariants}
+          className="grid grid-cols-2 gap-8 mt-16 sm:grid-cols-3 md:gap-12"
+        >
+          {[
+            { label: 'Students Helped', value: '500+' },
+            { label: 'Success Rate', value: '95%' },
+            { label: 'Subjects', value: '4+' },
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <p className="text-3xl font-bold text-white">{stat.value}</p>
+              <p className="text-gray-400">{stat.label}</p>
             </div>
-
-        </div>
+          ))}
+        </motion.div>
+      </motion.div>
     </div>
-  )
-}
+  );
+};
 
 export default Hero;
